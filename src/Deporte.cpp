@@ -1,28 +1,13 @@
 #include "Deporte.h"
 
-//Constructor Default
-Deporte::Deporte()
+//Constructores
+Deporte::Deporte() : Evento()
 {
-    sNomDeporte = "";
-    sEquipos = "";
-}
-//Constructoes
-Deporte::Deporte(string sNomDeporte, string sEquipos)
-{
-	this->sNomDeporte = sNomDeporte;
-	this->sEquipos = sEquipos;
+	//Constructor Default
 }
 Deporte::Deporte(string sNombre, string sFecha, double dPrecio, int iCapacidad,
 				 string sLugar, string sType, string sNomDeporte, string sEquipos)
 {
-	//Att. superclase
-	this->sNombre = sNombre;
-	this->sFecha = sFecha;
-	this->dPrecio = dPrecio;
-	this->iCapacidad = iCapacidad;
-	this->sLugar = sLugar;
-	this->sType = sType;
-	//Att. subclase
 	this->sNomDeporte = sNomDeporte;
 	this->sEquipos = sEquipos;
 }

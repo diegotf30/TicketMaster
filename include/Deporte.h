@@ -8,7 +8,6 @@ class Deporte : public Evento
 	public:
 		//Constructores
 		Deporte();
-		Deporte(string sNomDeporte, string sEquipos);
 		Deporte(string sNombre, string sFecha, double dPrecio, int iCapacidad,
 				 string sLugar, string sType, string sNomDeporte, string sEquipos);
 
