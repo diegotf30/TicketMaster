@@ -4,14 +4,15 @@ Boleto::Boleto()
 {
     evento = Evento();
     iBarcode = 0;
-    sAsiento = "";
+    iAsiento = 0;
+    sFechaCompra = "";
 }
 //Constructor
-Boleto::Boleto(Evento evento, long long int iBarcode, string sAsiento, string sFechaCompra)
+Boleto::Boleto(Evento evento, long long int iBarcode, int iAsiento, string sFechaCompra)
 {
     this->evento = evento;
     this->iBarcode = iBarcode;
-    this->sAsiento = sAsiento;
+    this->iAsiento = iAsiento;
     this->sFechaCompra = sFechaCompra;
 }
 //Destructor
@@ -29,9 +30,9 @@ void Boleto::setBarcode(long long int iBarcode)
 {
 	this->iBarcode = iBarcode;
 }
-void Boleto::setAsiento(string sAsiento)
+void Boleto::setAsiento(int iAsiento)
 {
-    this->sAsiento = sAsiento;
+    this->iAsiento = iAsiento;
 }
 void Boleto::setFechaCompra(string sFechaCompra)
 {
@@ -46,9 +47,9 @@ long long int Boleto::getBarcode()
 {
 	return iBarcode;
 }
-string Boleto::getAsiento()
+int Boleto::getAsiento()
 {
-	return sAsiento;
+	return iAsiento;
 }
 string Boleto::getFechaCompra()
 {
