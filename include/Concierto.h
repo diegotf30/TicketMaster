@@ -9,7 +9,7 @@ class Concierto : public Evento
 		//Constructores
 		Concierto();
 		Concierto(string sNombre, string sFecha, double dPrecio, int iCapacidad,
-				 string sLugar, string sType, string sNomBanda);
+				 int iBoletosComprados, string sLugar, string sType, string sNomBanda);
 		//Destructor
 		virtual ~Concierto();
 

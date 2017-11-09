@@ -6,7 +6,7 @@ Concierto::Concierto() : Evento()
 	//Constructor Default
 }
 
-Concierto::Concierto(string sNombre, string sFecha, double dPrecio,
+Concierto::Concierto(string sNombre, string sFecha, double dPrecio, int iBoletosComprados,
 					 int iCapacidad, string sLugar, string sType, string sNomBanda)
 {
 	this->sNomBanda = sNomBanda;

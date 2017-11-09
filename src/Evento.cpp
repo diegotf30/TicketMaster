@@ -7,6 +7,7 @@ Evento::Evento()
 	sFecha = "";
 	dPrecio = 0;
 	iCapacidad = 0;
+	iBoletosComprados = 0;
 	sLugar = "";
 	sType = "";
 }
@@ -33,6 +34,10 @@ void Evento::setCapacidad(int iCapacidad)
 {
 	this->iCapacidad = iCapacidad;
 }
+void Evento::setBoletosComprados(int iBoletosComprados)
+{
+	this->iBoletosComprados = iBoletosComprados;
+}
 void Evento::setLugar(string sLugar)
 {
 	this->sLugar = sLugar;
@@ -54,6 +59,10 @@ double Evento::getPrecio()
 int Evento::getCapacidad()
 {
 	return iCapacidad;
+}
+int Evento::getBoletosComprados()
+{
+    return iBoletosComprados;
 }
 string Evento::getLugar()
 {

@@ -5,7 +5,7 @@ Deporte::Deporte() : Evento()
 {
 	//Constructor Default
 }
-Deporte::Deporte(string sNombre, string sFecha, double dPrecio, int iCapacidad,
+Deporte::Deporte(string sNombre, string sFecha, double dPrecio, int iCapacidad, int iBoletosComprados,
 				 string sLugar, string sType, string sNomDeporte, string sEquipos)
 {
 	this->sNomDeporte = sNomDeporte;

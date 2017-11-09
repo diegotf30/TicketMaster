@@ -7,7 +7,7 @@ Festival::Festival() : Evento()
 }
 
 Festival::Festival(string sNombre, string sFecha, double dPrecio, int iCapacidad,
-				 string sLugar, string sType, vector<string>bandas)
+				 int iBoletosComprados, string sLugar, string sType, vector<string>bandas)
 {
 	this->bandas = bandas;
 }

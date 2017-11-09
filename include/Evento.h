@@ -18,6 +18,7 @@ class Evento
 		void setFecha(string sFecha);
 		void setPrecio(double dPrecio);
 		void setCapacidad(int iCapacidad);
+		void setBoletosComprados(int iBoletosComprados);
 		void setLugar(string sLugar);
 		void setType(string sType);
 		//Getters
@@ -25,6 +26,7 @@ class Evento
 		string getFecha();
 		double getPrecio();
 		int getCapacidad();
+		int getBoletosComprados();
 		string getLugar();
 		string getType();
 
@@ -33,6 +35,7 @@ class Evento
 		string sFecha;
 		double dPrecio;
 		int iCapacidad;
+		int iBoletosComprados;
 		string sLugar;
 		string sType;
 
