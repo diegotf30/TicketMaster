@@ -3,6 +3,9 @@
 
 #include <vector>
 #include <iostream>
+#include <ctime> //sFechaCompra
+#include <cstdlib> //srand()
+#include <sstream> //int -> str
 #include "Evento.h"
 #include "Boleto.h"
 
@@ -28,7 +31,7 @@ class Usuario
 
 		//Metodos
         void verCompras();
-        void verBoleto();
+        void verBoleto(Boleto boleto);
         void compraBoleto(Evento evento);
 
 	protected:

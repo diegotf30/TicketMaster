@@ -1,5 +1,32 @@
 #include "Usuario.h"
 
+//Regresa str con formato: "YYYY-MM-DD"
+string getFechaActual() {
+	stringstream ss;
+	time_t t = time(0);   // get time now
+	struct tm *now = localtime(&t);
+
+	ss << (now->tm_year + 1900) << '-';
+	ss << (now->tm_mon + 1) << '-';
+    ss <<  now->tm_mday;
+	return ss.str();
+}
+
+//Regresa un codigo de barras random de 12 digitos
+//	Los primeros 2 digitos son en base al asiento
+long long int getBarcode(int iAsiento) {
+	int iResto = 1000000000;
+	int iBC = iAsiento * iResto; //80|000 000 0000
+	srand(time(NULL));
+
+	for (int i = 0; i < 10; i++) {
+		int digit = rand() % 10;
+		iResto /= 10;
+		iBC += digit * iResto;
+	}
+	return iBC;
+}
+
 //Constructor Default
 Usuario::Usuario()
 {
@@ -83,5 +110,15 @@ void Usuario::verBoleto(Boleto boleto)
 }
 void Usuario::compraBoleto(Evento evento)
 {
-	if(evento.getCapacidad() + 1 < )
+	if(evento.getBoletosComprados() + 1 <= evento.getCapacidad()) {
+		//Actualizamos la cant. de boletos comprados
+		evento.setBoletosComprados(evento.getBoletosComprados() + 1);
+        //Agregamos el boleto al historial de compras
+        long long int iBC = getBarcode(evento.getBoletosComprados());
+        string sFecha = getFechaActual();
+        compras.push_back(Boleto(evento, iBC, evento.getBoletosComprados(), sFecha));
+	}
+	else {
+		cout << "Error en compra: Evento lleno!" << endl;
+	}
 }
