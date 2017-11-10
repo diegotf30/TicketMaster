@@ -42,6 +42,10 @@ void Evento::setLugar(string sLugar)
 {
 	this->sLugar = sLugar;
 }
+void Evento::setType(string sType)
+{
+	this->sType = sType;
+}
 
 //Getters
 string Evento::getNombre()
