@@ -8,6 +8,7 @@ class Concierto : public Evento
 	public:
 		//Constructores
 		Concierto();
+		Concierto(Evento event, string sNomBanda);
 		Concierto(string sNombre, string sFecha, double dPrecio, int iCapacidad,
 				 int iBoletosComprados, string sLugar, string sType, string sNomBanda);
 		//Destructor

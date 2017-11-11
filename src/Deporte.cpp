@@ -5,6 +5,22 @@ Deporte::Deporte() : Evento()
 {
 	//Constructor Default
 }
+//Event -> Deporte
+Deporte::Deporte(Evento event, string sNomDeporte, string sEquipos)
+{
+	//Atributos de Evento
+	sNombre = event.getNombre();
+	sFecha = event.getFecha();
+	dPrecio = event.getPrecio();
+	iBoletosComprados = event.getBoletosComprados();
+	iCapacidad = event.getCapacidad();
+	sLugar = event.getLugar();
+	sType = event.getType();
+
+	//Atributos de Deporte
+	this->sNomDeporte = sNomDeporte;
+	this->sEquipos = sEquipos;
+}
 Deporte::Deporte(string sNombre, string sFecha, double dPrecio, int iCapacidad, int iBoletosComprados,
 				 string sLugar, string sType, string sNomDeporte, string sEquipos)
 {

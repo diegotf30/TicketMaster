@@ -8,6 +8,7 @@ class Deporte : public Evento
 	public:
 		//Constructores
 		Deporte();
+		Deporte(Evento event, string sNomDeporte, string sEquipos);
 		Deporte(string sNombre, string sFecha, double dPrecio, int iCapacidad, int iBoletosComprados,
 				string sLugar, string sType, string sNomDeporte, string sEquipos);
 

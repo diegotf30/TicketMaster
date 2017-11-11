@@ -9,6 +9,7 @@ class Festival : public Evento
 	public:
 		//Constructores
 		Festival();
+		Festival(Evento event, vector<string> bandas);
 		Festival(string sNombre, string sFecha, double dPrecio, int iCapacidad,
 				 int iBoletosComprados, string sLugar, string sType, vector<string> bandas);
 		//Destructor
