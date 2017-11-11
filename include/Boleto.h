@@ -8,17 +8,17 @@ class Boleto
 	public:
 		//Constructores
 		Boleto();
-		Boleto(Evento evento, long long int iBarcode, int iAsiento, string sFechaCompra);
+		Boleto(Evento* evento, long long int iBarcode, int iAsiento, string sFechaCompra);
         //Destructor
 		virtual ~Boleto();
 
 		//Setters
-        void setEvento(Evento evento);
+        void setEvento(Evento* evento);
         void setBarcode(long long int iBarcode);
         void setAsiento(int iAsiento);
         void setFechaCompra(string sFechaCompra);
         //Getters
-        Evento getEvento();
+        Evento* getEvento();
         long long int getBarcode();
         int getAsiento();
         string getFechaCompra();
@@ -26,7 +26,7 @@ class Boleto
 	protected:
 
 	private:
-		Evento evento;
+		Evento* evento;
 		long long int iBarcode;
         int iAsiento;
         string sFechaCompra;

@@ -2,13 +2,13 @@
 //Constructor Default
 Boleto::Boleto()
 {
-    evento = Evento();
+*    evento = Evento();
     iBarcode = 0;
     iAsiento = 0;
     sFechaCompra = "";
 }
 //Constructor
-Boleto::Boleto(Evento evento, long long int iBarcode, int iAsiento, string sFechaCompra)
+Boleto::Boleto(Evento* evento, long long int iBarcode, int iAsiento, string sFechaCompra)
 {
     this->evento = evento;
     this->iBarcode = iBarcode;
@@ -22,7 +22,7 @@ Boleto::~Boleto()
 }
 
 //Setters
-void Boleto::setEvento(Evento evento)
+void Boleto::setEvento(Evento* evento)
 {
 	this->evento = evento;
 }
@@ -39,7 +39,7 @@ void Boleto::setFechaCompra(string sFechaCompra)
 	this->sFechaCompra = sFechaCompra;
 }
 //Getters
-Evento Boleto::getEvento()
+Evento* Boleto::getEvento()
 {
 	return evento;
 }

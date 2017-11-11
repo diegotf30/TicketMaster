@@ -32,7 +32,7 @@ class Usuario
 		//Metodos
         void verCompras();
         void verBoleto(Boleto boleto);
-        void compraBoleto(Evento evento);
+        void compraBoleto(Evento* evento);
 
 	protected:
 

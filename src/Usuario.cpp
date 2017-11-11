@@ -91,32 +91,32 @@ void Usuario::verCompras()
 	cout << "----------------------------------------" << endl;
     for(int i = 0; i < compras.size(); i++) {
         cout << compras[i].getFechaCompra() << '\t';
-        cout << compras[i].getEvento().getNombre() << '\t';
-        cout << compras[i].getEvento().getType() << '\t';
-        cout << compras[i].getEvento().getPrecio() << '\t';
+        cout << compras[i].getEvento()->getNombre() << '\t';
+        cout << compras[i].getEvento()->getType() << '\t';
+        cout << compras[i].getEvento()->getPrecio() << '\t';
 		cout << "----------------------------------------" << endl;
     }
 }
 void Usuario::verBoleto(Boleto boleto)
 {
 	cout << "----------------------------------------" << endl;
-	cout << "Boleto para: " << boleto.getEvento().getNombre() << endl;
+	cout << "Boleto para: " << boleto.getEvento()->getNombre() << endl;
     cout << "\tID: " << boleto.getBarcode() << endl;
-    cout << "\tFecha: " << boleto.getEvento().getFecha() << endl;
-    cout << "\tLugar: " << boleto.getEvento().getLugar() << endl;
+    cout << "\tFecha: " << boleto.getEvento()->getFecha() << endl;
+    cout << "\tLugar: " << boleto.getEvento()->getLugar() << endl;
     cout << "\tAsiento: " << boleto.getAsiento() << endl;
-    cout << "\tCosto: " << boleto.getEvento().getPrecio() << endl;
+    cout << "\tCosto: " << boleto.getEvento()->getPrecio() << endl;
 	cout << "----------------------------------------" << endl;
 }
-void Usuario::compraBoleto(Evento evento)
+void Usuario::compraBoleto(Evento* evento)
 {
-	if(evento.getBoletosComprados() + 1 <= evento.getCapacidad()) {
+	if(evento->getBoletosComprados() + 1 <= evento->getCapacidad()) {
 		//Actualizamos la cant. de boletos comprados
-		evento.setBoletosComprados(evento.getBoletosComprados() + 1);
+		evento->setBoletosComprados(evento->getBoletosComprados() + 1);
         //Agregamos el boleto al historial de compras
-        long long int iBC = getBarcode(evento.getBoletosComprados());
+        long long int iBC = getBarcode(evento->getBoletosComprados());
         string sFecha = getFechaActual();
-        compras.push_back(Boleto(evento, iBC, evento.getBoletosComprados(), sFecha));
+        compras.push_back(Boleto(evento, iBC, evento->getBoletosComprados(), sFecha));
 	}
 	else {
 		cout << "Error en compra: Evento lleno!" << endl;
