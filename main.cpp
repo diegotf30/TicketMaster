@@ -1,4 +1,7 @@
+#include <cstdlib> //Para system()
 #include <fstream>
+#include <map> //Para compras
+#include <sstream> //Para istringstream
 
 #include "Evento.h"
 #include "Deporte.h"
@@ -10,102 +13,216 @@
 
 using namespace std;
 
-void showOptions(string sOption) {
+void despliegaOpciones(string sEventType, vector<Evento*> eventos, map<int, string> &compras) {
+	int iCount = 1;
+	for(int i = 0; i < eventos.size(); i++) {
+		if(eventos[i]->getType() == sEventType) {
+			compras[iCount] = eventos[i]->getNombre();
+			int iBolDisp = eventos[i]->getCapacidad() - eventos[i]->getBoletosComprados();
 
+			cout << "     " << iCount << ". " << eventos[i]->getNombre() << " - ";
+			if(sEventType == "Festival") {
+				cout << eventos[i]->getFecha() << endl;
+			}
+			else if(sEventType == "Concierto") {
+				//Hacemos cast para que arreglo de Superclase nos de acceso a metodos de Subclase
+				cout << ((Concierto*)eventos[i])->getBanda() << endl;
+			}
+			else { //sEventType == "Deporte"
+				cout << ((Deporte*)eventos[i])->getEquipos();
+				cout << '(' << ((Deporte*)eventos[i])->getDeporte() << ')' << endl;
+			}
+			cout << "\tFecha: " << eventos[i]->getFecha() << endl;
+			cout << "\tLugar: " << eventos[i]->getLugar() << endl;
+			cout << "\tBoletos a $" << eventos[i]->getPrecio();
+			cout << " | DISPONIBLES: " << iBolDisp << endl;
+
+			if(sEventType == "Festival") {
+				vector<string> auxBandasFestival = ((Festival*)eventos[i])->getBandas();
+				for(int i = 0; i < auxBandasFestival.size(); i++) {
+					cout << "\t  • " << auxBandasFestival[i] << endl;
+				}
+			}
+			cout << "----------------------------------------------------" << endl;
+			iCount++;
+		}
+	}
 }
 
-void llenaEvento(Evento &event) {
+void showOptions(char cOption, Usuario &user, vector<Evento*> eventos) {
+	map<int, string> compras; //Lo usamos para ligar numero desplegado con el Evento
+	system("cls");
+	switch(cOption) {
+		case '1':
+			cout << "Conciertos:" << endl;
+			despliegaOpciones("Concierto", eventos, compras);
+			break;
+		case '2':
+			cout << "Deportes:" << endl;
+			despliegaOpciones("Deporte", eventos, compras);
+			break;
+		case '3':
+			cout << "Festivales:" << endl;
+			despliegaOpciones("Festival", eventos, compras);
+			break;
+		case '4':
+		{
+			int iAux = -1;
+			while(iAux != 0) {
+				cout << "Cuenta ID: #" << user.getNumCuenta() << endl;
+				cout << "Nombre: " << user.getNombre() << endl;
+				cout << "Correo: " << user.getCorreo() << endl << endl;
+				cout << "Historial de compras:" << endl;
+				user.verCompras();
+				cout << "Desea examinar algun boleto? (Si ninguno ingrese 0)" << endl;
+				cin >> iAux;
+				if(iAux != 0) {
+					user.verBoleto(user.getCompras()[iAux - 1]);
+					cout << "\nPresione ENTER para volver a la pantalla pasada" << endl;
+                    cin.ignore(); //Para ignorar primer ENTER (gracias al cin pasado)
+                    cin.ignore();
+					system("cls");
+				}
+			}
+			break;
+		}
+	}
+	if(cOption != '4') {
+		int iBoleto = 0;
+		bool bPrimeraCompra = true;
+		cout << "Que boleto desea comprar? (Si ninguno ingrese 0)" << endl;
+		cin  >> iBoleto;
+
+		while(iBoleto != 0) {
+			if(!bPrimeraCompra) {
+				cout << "Desea hacer otra compra? (Si quiere salir ingrese 0)" << endl;
+				cin >> iBoleto;
+			}
+			else
+				bPrimeraCompra =  false;
+
+			if(iBoleto > 0) {
+				int i = 0;
+				//Encuentra boleto con Num a comprar
+				while(i < eventos.size() && compras[iBoleto] != eventos[i]->getNombre()) {i++;}
+				if(i < eventos.size()) {
+					user.compraBoleto(eventos[i]);
+				}
+				else
+					cout << endl << "ERROR! No existe un evento con ese numero" << endl << endl;
+			}
+		}
+	}
+	system("cls");
+}
+
+void llenaEvento(Evento &event, ifstream& ifInput) {
 	string sAux = "";
 	//Nombre de evento
-	getline(cin, sAux);
+	getline(ifInput, sAux);
 	event.setNombre(sAux);
 	//Fecha
-	getline(cin, sAux);
+	getline(ifInput, sAux);
 	event.setFecha(sAux);
 	//Lugar
-	getline(cin, sAux);
+	getline(ifInput, sAux);
 	event.setLugar(sAux);
 	//Capacidad
-	getline(cin, sAux);
+	getline(ifInput, sAux);
 	int iCap = 0;
 	istringstream(sAux) >> iCap;
 	event.setCapacidad(iCap);
 	//Precio
-	getline(cin, sAux);
+	getline(ifInput, sAux);
 	double dPrecio = 0;
 	stringstream(sAux) >> dPrecio;
 	event.setPrecio(dPrecio);
 	//Boletos Comprados
-	getline(cin, sAux);
+	getline(ifInput, sAux);
 	int iBol = 0;
 	istringstream(sAux) >> iBol;
 	event.setBoletosComprados(iBol);
 }
 
-vector<Evento> getEventos() {
-	vector<Evento> eventos;
+vector<Evento*> getEventos() {
+	vector<Evento*> eventos; //Arreglo apunta a clases hijo
 	ifstream ifInput;
 	ifInput.open("events.txt");
 	if(ifInput.bad()) {
 		cout << "ERROR 404: Events.txt not found" << endl;
-		return vector<Evento>();
+		return vector<Evento*>();
 	}
 
     string sCantEventos;
-    getline(cin, sCantEventos);
+    getline(ifInput, sCantEventos);
 
     string sAux, sType;
     for(int i = 0; i < sCantEventos[0] - '0'; i++) {
-		getline(cin, sAux); //Linea basura, descartada
-		getline(cin, sType);
+        //Festival hara getline hasta llegar a separador ("--------")
+        //	  por lo que no es necesario descartar otra linea.
+		if(eventos.size() == 0 || eventos[eventos.size() - 1]->getType() != "Festival")
+			getline(ifInput, sAux); //Linea basura, descartada
+		getline(ifInput, sType);
 
 		Evento eventoAux;
 		eventoAux.setType(sType);
 		if(sType == "Concierto") {
-			llenaEvento(eventoAux);
+			llenaEvento(eventoAux, ifInput);
 
 			string sNomBanda = "";
-			getline(cin, sNomBanda);
-            eventos.push_back(Concierto(eventoAux, sNomBanda)); //Guardamos concierto
+			getline(ifInput, sNomBanda);
+            eventos.push_back(new Concierto(eventoAux, sNomBanda)); //Guardamos concierto
 		}
 		else if(sType == "Deporte") {
-			llenaEvento(eventoAux);
+			llenaEvento(eventoAux, ifInput);
 
+			string sNomDeporte = "";
+			getline(ifInput, sNomDeporte);
 			string sEquipos = "";
-			getline(cin, sEquipos);
-			eventos.push_back(Deporte(eventoAux, sEquipos)); //Guardamos Deporte
+			getline(ifInput, sEquipos);
+			eventos.push_back(new Deporte(eventoAux, sNomDeporte, sEquipos)); //Guardamos Deporte
 		}
 		else { //Festival
-			llenaEvento(eventoAux);
+			llenaEvento(eventoAux, ifInput);
 
 			vector<string> vsBandas;
-			getline(cin, sAux);
+			getline(ifInput, sAux);
 			while(sAux[0] != '-') {
 				vsBandas.push_back(sAux);
-				getline(cin, sAux);
+				getline(ifInput, sAux);
 			}
-			eventos.push_back(Festival(eventoAux, vsBandas)); //Guardamos Festival
+			eventos.push_back(new Festival(eventoAux, vsBandas)); //Guardamos Festival
 		}
     }
+    ifInput.close();
+
+    return eventos;
 }
 
 int main()
 {
-    Usuario user("Ian Sommerville", "ian@gmail.com", 8182551681, vector<Boleto>());
-    vector<Evento> eventos = getEventos();
+    Usuario user("Ian Sommerville", "ian@gmail.com", 83152000, vector<Boleto>());
+    vector<Evento*> eventos = getEventos();
 	string keyPress = "";
-	while(keyPress != "9") {
+	while(keyPress[0] != '9') {
 		cout << "~~~~~~~~~~~BIENVENIDO A TICKET MASTER!~~~~~~~~~~~" << endl;
 		cout << "Eventos:" << endl;
 		cout << "     1. Conciertos" << endl;
-		cout << "     2. Partidos" << endl;
+		cout << "     2. Deportes" << endl;
 		cout << "     3. Festivales" << endl;
 		cout << "--------------------------" << endl;
 		cout << "     4. Cuenta" << endl;
 		cout << "--------------------------" << endl;
 		cout << "     9. SALIR" << endl;
 		getline(cin, keyPress);
-		showOptions(keyPress);
+		if(keyPress[0] == '1' || keyPress[0] == '2' || keyPress[0] == '3' || keyPress[0] == '4') {
+			showOptions(keyPress[0], user, eventos);
+			getline(cin, keyPress); // Para eliminar '\0', por usar cin
+		}
+		else if(keyPress[0] != '9') {
+			system("cls");
+			cout << "ERROR: Opcion invalida!\n\n";
+		}
 	}
 	cout << "\nGracias, vuelva pronto" << endl;
     return 0;
