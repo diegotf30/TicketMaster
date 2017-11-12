@@ -3,9 +3,10 @@
 
 #include <vector>
 #include <iostream>
+#include <stdio.h>
 #include <ctime> //sFechaCompra
 #include <cstdlib> //srand()
-#include <sstream> //int -> str
+#include <string>
 #include "Evento.h"
 #include "Boleto.h"
 

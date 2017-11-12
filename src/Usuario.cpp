@@ -13,10 +13,10 @@ string getFechaActual() {
 }
 
 //Regresa un codigo de barras random de 12 digitos
-//	Los primeros 2 digitos son en base al asiento
+//	Los primeros 3 digitos son en base al asiento
 long long int getBarcode(int iAsiento) {
-	int iResto = 1000000000;
-	int iBC = iAsiento * iResto; //80|000 000 0000
+	int iResto = 100000000;
+	long long int iBC = iAsiento * iResto; //800| 000 000 000
 	srand(time(NULL));
 
 	for (int i = 0; i < 10; i++) {
@@ -87,26 +87,33 @@ vector<Boleto> Usuario::getCompras()
 //Metodos
 void Usuario::verCompras()
 {
-	cout << "Fecha\tEvento\tTipo\tPrecio" << endl;
+	cout << endl;
+	printf(" %-5s%-15s%-55s%-15s%-15s\n", "#", "Fecha", "Evento", "Tipo", "Precio");
+	cout << "-----------------------------------------------------------";
 	cout << "----------------------------------------" << endl;
+
     for(int i = 0; i < compras.size(); i++) {
-        cout << compras[i].getFechaCompra() << '\t';
-        cout << compras[i].getEvento()->getNombre() << '\t';
-        cout << compras[i].getEvento()->getType() << '\t';
-        cout << compras[i].getEvento()->getPrecio() << '\t';
+		string sFechaCompra = compras[i].getFechaCompra();
+		string sNombre = compras[i].getEvento()->getNombre();
+		string sEventType = compras[i].getEvento()->getType();
+		double dPrecio = compras[i].getEvento()->getPrecio();
+
+		printf(" %-5i%-15s%-55s%-15s%-15.2f\n", i + 1, sFechaCompra.c_str(),
+			 sNombre.c_str(), sEventType.c_str(), dPrecio);
+		cout << "-----------------------------------------------------------";
 		cout << "----------------------------------------" << endl;
     }
 }
 void Usuario::verBoleto(Boleto boleto)
 {
-	cout << "----------------------------------------" << endl;
+	cout << "---------------------------------------------------------------" << endl;
 	cout << "Boleto para: " << boleto.getEvento()->getNombre() << endl;
     cout << "\tID: " << boleto.getBarcode() << endl;
     cout << "\tFecha: " << boleto.getEvento()->getFecha() << endl;
     cout << "\tLugar: " << boleto.getEvento()->getLugar() << endl;
     cout << "\tAsiento: " << boleto.getAsiento() << endl;
     cout << "\tCosto: " << boleto.getEvento()->getPrecio() << endl;
-	cout << "----------------------------------------" << endl;
+	cout << "---------------------------------------------------------------" << endl;
 }
 void Usuario::compraBoleto(Evento* evento)
 {
@@ -119,6 +126,6 @@ void Usuario::compraBoleto(Evento* evento)
         compras.push_back(Boleto(evento, iBC, evento->getBoletosComprados(), sFecha));
 	}
 	else {
-		cout << "Error en compra: Evento lleno!" << endl;
+		cout << endl << "Error en compra: Evento lleno!" << endl << endl;
 	}
 }
