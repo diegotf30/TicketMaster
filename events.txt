@@ -1,0 +1,67 @@
+6
+---------------------------
+Concierto
+Lift Your Skinny Fists Like Antennas to Heaven Tour
+2018/05/15
+Cafe Iguana
+150
+249.99
+0
+Godspeed You! Black Emperor
+---------------------------
+Deporte
+Clasico 113
+2018/02/08
+Estadio BBVA Bancomer
+2000
+800
+1248
+Futbol
+Tigres vs Rayados
+---------------------------
+Festival
+Pa'l Norte
+2018/06/04
+Parque Fundidora
+5000
+999.99
+0
+Gorillaz
+Kanye West
+Don McLean
+King Crimson
+The Strokes
+---------------------------
+Concierto
+Jaloguin tour xd
+2019/10/18
+Pabellon M
+500
+750
+500
+Smashing Pumpkins
+---------------------------
+Deporte
+WWE Superslam
+2020/11/08
+TBD
+1500
+1499.99
+235
+Pelea
+TripleH vs The Undertaker
+---------------------------
+Festival
+Corona Capital
+2019/09/09
+Parque Fundidora
+5000
+749.99
+435
+Caifanes
+Foo Fighters
+Bright Eyes
+Ludovico Einaudi
+LCD Soundsystem
+Rise Against
+---------------------------
