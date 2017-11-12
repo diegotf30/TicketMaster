@@ -2,7 +2,7 @@
 //Constructor Default
 Boleto::Boleto()
 {
-*    evento = Evento();
+    *evento = Evento();
     iBarcode = 0;
     iAsiento = 0;
     sFechaCompra = "";
