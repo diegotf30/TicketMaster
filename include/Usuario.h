@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <ctime> //sFechaCompra
 #include <cstdlib> //srand()
+#include <sstream>
 #include <string>
 #include "Evento.h"
 #include "Boleto.h"
