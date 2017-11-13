@@ -1,0 +1,58 @@
+# depslib dependency file v1.0
+1510590248 source:c:\users\diego\onedrive\documentos\github\ticketmaster\main.cpp
+	<cstdlib>
+	<fstream>
+	<map>
+	<sstream>
+	"Evento.h"
+	"Deporte.h"
+	"Concierto.h"
+	"Festival.h"
+	"Usuario.h"
+	"Boleto.h"
+
+1510342245 source:c:\users\diego\onedrive\documentos\github\ticketmaster\src\concierto.cpp
+	"Concierto.h"
+
+1510341949 c:\users\diego\onedrive\documentos\github\ticketmaster\include\concierto.h
+	"Evento.h"
+
+1510259421 c:\users\diego\onedrive\documentos\github\ticketmaster\include\evento.h
+	<string>
+
+1510342409 source:c:\users\diego\onedrive\documentos\github\ticketmaster\src\deporte.cpp
+	"Deporte.h"
+
+1510342279 c:\users\diego\onedrive\documentos\github\ticketmaster\include\deporte.h
+	"Evento.h"
+
+1510288758 source:c:\users\diego\onedrive\documentos\github\ticketmaster\src\evento.cpp
+	"Evento.h"
+
+1510342541 source:c:\users\diego\onedrive\documentos\github\ticketmaster\src\festival.cpp
+	"Festival.h"
+
+1510342458 c:\users\diego\onedrive\documentos\github\ticketmaster\include\festival.h
+	"Evento.h"
+	<vector>
+
+1510514742 source:c:\users\diego\onedrive\documentos\github\ticketmaster\src\boleto.cpp
+	"Boleto.h"
+
+1510514728 c:\users\diego\onedrive\documentos\github\ticketmaster\include\boleto.h
+	"Evento.h"
+
+1510514688 source:c:\users\diego\onedrive\documentos\github\ticketmaster\src\usuario.cpp
+	"Usuario.h"
+
+1510590314 c:\users\diego\onedrive\documentos\github\ticketmaster\include\usuario.h
+	<vector>
+	<iostream>
+	<stdio.h>
+	<ctime>
+	<cstdlib>
+	<sstream>
+	<string>
+	"Evento.h"
+	"Boleto.h"
+

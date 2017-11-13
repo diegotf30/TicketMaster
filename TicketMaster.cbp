@@ -34,15 +34,19 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="include/Boleto.h" />
 		<Unit filename="include/Concierto.h" />
 		<Unit filename="include/Deporte.h" />
 		<Unit filename="include/Evento.h" />
 		<Unit filename="include/Festival.h" />
+		<Unit filename="include/Usuario.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/Boleto.cpp" />
 		<Unit filename="src/Concierto.cpp" />
 		<Unit filename="src/Deporte.cpp" />
 		<Unit filename="src/Evento.cpp" />
 		<Unit filename="src/Festival.cpp" />
+		<Unit filename="src/Usuario.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
