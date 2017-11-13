@@ -67,21 +67,27 @@ void showOptions(char cOption, Usuario &user, vector<Evento*> eventos) {
 			break;
 		case '4':
 		{
-			int iAux = -1;
-			while(iAux != 0) {
+			int iBoleto = -1;
+			while(iBoleto != 0) {
 				cout << "Cuenta ID: #" << user.getNumCuenta() << endl;
 				cout << "Nombre: " << user.getNombre() << endl;
 				cout << "Correo: " << user.getCorreo() << endl << endl;
 				cout << "Historial de compras:" << endl;
 				user.verCompras();
 				cout << "Desea examinar algun boleto? (Si ninguno ingrese 0)" << endl;
-				cin >> iAux;
-				if(iAux != 0) {
-					user.verBoleto(user.getCompras()[iAux - 1]);
+				cin >> iBoleto;
+				if(iBoleto > 0 && iBoleto <= user.getCompras().size()) {
+					user.verBoleto(user.getCompras()[iBoleto - 1]);
 					cout << "\nPresione ENTER para volver a la pantalla pasada" << endl;
                     cin.ignore(); //Para ignorar primer ENTER (gracias al cin pasado)
                     cin.ignore();
 					system("cls");
+				}
+				else if(iBoleto > user.getCompras().size()) {
+					system("cls");
+					cout << "---------------------------------------------------------" << endl;
+					cout << "ERROR: Indice invalido! Seleccione un boleto de la lista" << endl;
+					cout << "---------------------------------------------------------" << endl;
 				}
 			}
 			break;
@@ -221,7 +227,9 @@ int main()
 		}
 		else if(keyPress[0] != '9') {
 			system("cls");
-			cout << "ERROR: Opcion invalida!\n\n";
+			cout << "------------------------" << endl;
+			cout << "ERROR: Opcion invalida!" << endl;
+			cout << "------------------------" << endl;
 		}
 	}
 	cout << "\nGracias, vuelva pronto" << endl;
