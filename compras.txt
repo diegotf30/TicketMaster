@@ -1,0 +1,43 @@
+Cuenta ID: #83152000
+Nombre: Ian Sommerville
+Correo: ian@gmail.com
+Boletos comprados: 5
+
+Historial de compras:
+
+---------------------------------------------------------------
+Boleto para: Lift Your Skinny Fists Like Antennas to Heaven Tour
+	ID: 135123297
+	Fecha: 2018/05/15
+	Lugar: Cafe Iguana
+	Asiento: 1
+	Costo: 249.99
+---------------------------------------------------------------
+Boleto para: Lift Your Skinny Fists Like Antennas to Heaven Tour
+	ID: 265558820
+	Fecha: 2018/05/15
+	Lugar: Cafe Iguana
+	Asiento: 2
+	Costo: 249.99
+---------------------------------------------------------------
+Boleto para: Clasico 113
+	ID: 437797137
+	Fecha: 2018/02/08
+	Lugar: Estadio BBVA Bancomer
+	Asiento: 1249
+	Costo: 800
+---------------------------------------------------------------
+Boleto para: WWE Superslam
+	ID: 2164457964
+	Fecha: 2020/11/08
+	Lugar: TBD
+	Asiento: 236
+	Costo: 1499.99
+---------------------------------------------------------------
+Boleto para: Pa'l Norte
+	ID: 195949885
+	Fecha: 2018/06/04
+	Lugar: Parque Fundidora
+	Asiento: 1
+	Costo: 999.99
+---------------------------------------------------------------
