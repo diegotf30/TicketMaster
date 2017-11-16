@@ -205,6 +205,58 @@ vector<Evento*> getEventos() {
     return eventos;
 }
 
+void outputEvents(vector<Evento*> eventos) {
+	ofstream ofOutput;
+	ofOutput.open("events.txt");
+	ofOutput << eventos.size() << endl;
+	ofOutput << "---------------------------" << endl;
+	for(int i = 0; i < eventos.size(); i++) {
+		ofOutput << eventos[i]->getType() << endl;
+		ofOutput << eventos[i]->getNombre() << endl;
+		ofOutput << eventos[i]->getFecha() << endl;
+		ofOutput << eventos[i]->getLugar() << endl;
+		ofOutput << eventos[i]->getCapacidad() << endl;
+		ofOutput << eventos[i]->getPrecio() << endl;
+		ofOutput << eventos[i]->getBoletosComprados() << endl;
+		if(eventos[i]->getType() == "Concierto")
+			ofOutput << ((Concierto*)eventos[i])->getBanda() << endl;
+		else if(eventos[i]->getType() == "Deporte") {
+			ofOutput << ((Deporte*) eventos[i])->getDeporte() << endl;
+			ofOutput << ((Deporte*) eventos[i])->getEquipos() << endl;
+		}
+		else {
+			vector<string> aux = ((Festival*) eventos[i])->getBandas();
+			for(int i = 0; i < aux.size(); i++)
+				ofOutput << aux[i] << endl;
+		}
+		ofOutput << "---------------------------" << endl;
+	}
+	ofOutput.close();
+}
+
+void outputPurchases(Usuario user) {
+	ofstream ofOutput;
+	vector<Boleto> compras = user.getCompras();
+	ofOutput.open("compras.txt");
+	ofOutput << "Cuenta ID: #" << user.getNumCuenta() << endl;
+	ofOutput << "Nombre: " << user.getNombre() << endl;
+	ofOutput << "Correo: " << user.getCorreo() << endl;
+	ofOutput << "Boletos comprados: " << compras.size() << endl << endl;
+	ofOutput << "Historial de compras:" << endl << endl;
+	ofOutput << "---------------------------------------------------------------" << endl;
+    for(int i = 0; i < compras.size(); i++) {
+		ofOutput << "Boleto para: " << compras[i].getEvento()->getNombre() << endl;
+		ofOutput << "\tID: " << compras[i].getBarcode() << endl;
+		ofOutput << "\tFecha: " << compras[i].getEvento()->getFecha() << endl;
+		ofOutput << "\tLugar: " << compras[i].getEvento()->getLugar() << endl;
+		ofOutput << "\tAsiento: " << compras[i].getAsiento() << endl;
+		ofOutput << "\tCosto: " << compras[i].getEvento()->getPrecio() << endl;
+		ofOutput << "---------------------------------------------------------------" << endl;
+    }
+
+    ofOutput.close();
+}
+
 int main()
 {
     Usuario user("Ian Sommerville", "ian@gmail.com", 83152000, vector<Boleto>());
@@ -232,6 +284,15 @@ int main()
 			cout << "------------------------" << endl;
 		}
 	}
+    if(user.getCompras().size() > 0) {
+		cout << "Desea guardar sus compras en un archivo? (y/n)" << endl;
+		getline(cin, keyPress);
+		if(keyPress[0] == 'y' || keyPress[0] == 'Y') {
+			outputPurchases(user);
+			cout << "Sus compras se han guardado exitosamente en \"compras.txt\"" << endl;
+		}
+    }
 	cout << "\nGracias, vuelva pronto" << endl;
+	outputEvents(eventos);
     return 0;
 }
